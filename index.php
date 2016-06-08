@@ -56,12 +56,12 @@
 		}
 		
 		if (!empty($timestamp)) {
-			echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" disabled="disabled" value="' . strftime('%d.%m.%Y %H:%M:%S', $timestamp) . '" /></span><br />';
-			echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" disabled="disabled" value="' . $timestamp . '" /></span>';
+			echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strftime('%d.%m.%Y %H:%M:%S', $timestamp) . '" /></span><br />';
+			echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $timestamp . '" /></span>';
 		}
 		else if (!empty($date)) {
-			echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" disabled="disabled" value="' . $date . '" /></span><br />';
-			echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" disabled="disabled" value="' . strtotime($date) . '" /></span>';
+			echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $date . '" /></span><br />';
+			echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strtotime($date) . '" /></span>';
 		}
 		
 		if (!empty($timestamp) || !empty($date)) {
