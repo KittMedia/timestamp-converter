@@ -1,2 +1,8 @@
+- Version 1.1.0
+	- Added GDPR compliance by removing jQuery and custom fonts
+
+- Version 1.0.1
+	- Used readonly="readonly" instead of disabled="disabled" for result input fields 
+
 - Version 1.0.0 (29th April 2016)
 	- Release of the first version
