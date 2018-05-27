@@ -1,5 +1,7 @@
 - Version 1.1.0
 	- Added GDPR compliance by removing jQuery and custom fonts
+	- Improved error displaying by not breaking the HTML
+	- Added seconds
 
 - Version 1.0.1
 	- Used readonly="readonly" instead of disabled="disabled" for result input fields 

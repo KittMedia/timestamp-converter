@@ -137,6 +137,10 @@ textarea {
 	font-size: 1rem;
 	outline: none;
 	padding: 5px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	width: 100%;
 }
 

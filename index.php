@@ -36,36 +36,39 @@
 		setlocale(LC_TIME, 'de_DE');
 		
 		$date = htmlspecialchars(filter_input(INPUT_POST, 'date'));
+		$isError = false;
 		$timestamp = intval(filter_input(INPUT_POST, 'timestamp'));
 		
 		if (!empty($timestamp) || !empty($date)) {
 			echo '<div class="result">';
+			echo '<h3>Ergebnis:</h3>';
 			
 			// validate
 			if (!empty($timestamp) && strlen($timestamp) !== 10) {
 				echo '<p class="error">Der eingegebene Zeitstempel ist nicht korrekt.</p>';
 				
-				return;
+				$isError = true;
 			}
+			
 			if (!empty($date) && !preg_match('/\d{2}.\d{2}.\d{4}\s{1}\d{2}:\d{2}:\d{2}/', $date)) {
 				echo '<p class="error">Das eingegebene Datumsformat ist nicht korrekt.</p>';
 				
-				return;
+				$isError = true;
 			}
-			
-			echo '<h3>Ergebnis:</h3>';
 		}
 		
-		if (!empty($timestamp)) {
-			echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strftime('%d.%m.%Y %H:%M:%S', $timestamp) . '" /></span><br />';
-			echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $timestamp . '" /></span>';
-		}
-		else if (!empty($date)) {
-			echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $date . '" /></span><br />';
-			echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strtotime($date) . '" /></span>';
+		if (!$isError) {
+			if ( ! empty( $timestamp ) ) {
+				echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strftime( '%d.%m.%Y %H:%M:%S', $timestamp ) . '" /></span><br />';
+				echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $timestamp . '" /></span>';
+			}
+			else if ( ! empty( $date ) ) {
+				echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $date . '" /></span><br />';
+				echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strtotime( $date ) . '" /></span>';
+			}
 		}
 		
-		if (!empty($timestamp) || !empty($date)) {
+		if ( ! empty( $timestamp ) || ! empty( $date ) ) {
 			echo '</div>';
 		}
 		?>
@@ -80,8 +83,10 @@
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var picker = flatpickr(document.getElementById('dateTime'), {
-			dateFormat: 'd.m.Y H:i',
+			dateFormat: 'd.m.Y H:i:S',
+			enableSeconds: true,
 			enableTime: true,
+			minuteIncrement: 1,
 			time_24hr: true
 		});
 	});
