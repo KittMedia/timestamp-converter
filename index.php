@@ -7,12 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <meta name="format-detection" content="telephone=no" />
 
-<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA7VBMVEX////+//gl0zn37AbU5e39+roecqIHZJhw43tZ3Wj68UQc0TH8/f6cwNdfm70QaZz36wDo8fbB2OW1z+LG9NOz8L8idaP///zz9/r//+7M3+o2gavZ5+94qsf8+rVHi7Mxfqr8+KMAXpb57yv37RTk7/Tf6/L9+8+t7rdNj7RAh7ACYJb681z68kv4+vz5//fs8/e60+Ozz9+ty97E8839+8m88cOz8LsseqcWbZ8LZppi4HAX0Cz//+rt/+qfwth6q8hmn79al7qm7K44gqyd66qc66b8+KT7+J/795ts4nhV3WT57zL57y4RzydhsiL/AAABBklEQVQ4y9XQ6VaCQBjG8QcMTURAK7KpoKiIKNxzb98Xvf/L0cHXgyNzAz5ff//DYV5s21gb6PUBV5N74BSqKE560O17mV+dDbwhe/xTuw/Ty2uZO0Hds5hSVPePLqgQ/QSoeVZLXgSJ86KwR4XwHzsO96R4XRU5bc3zA3LAMKn4Twry4wqwWSg6FeSZorsqWD5qAkLxMuo0xmqoxDkXQNW6qUPc820Zu5MP3NlfWBY1wU+5l8KFnwNpkbrP/YCciqiy6YcxORXvVBj8+9x1chqjpxqmT84fQEuPwU/wRK4BmaKJxYmkTkVkjtqN31JfIc8UQ7+D8SxEbLuQrlUG3j6Bn29s2eYQAB0eu33jlQAAAABJRU5ErkJggg==" type="image/x-icon" />
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 <link rel="apple-touch-startup-image" href="/images/apple-touch-icon.png" />
 <link rel="mask-icon" href="images/pinned_logo.svg" color="#186e9f" />
 
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/flatpickr.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -23,8 +24,8 @@
 		<p>Bitte gib das Datum oder den Zeitstempel an, den du konvertieren möchtest. Bei Eingabe beider Felder wird nur der Zeitstempel beachtet.</p>
 		
 		<form action="index.php" method="post">
-			<label><span class="columnLeft">Datum:</span> <span class="columnRight"><input class="dateTime" type="text" name="date" pattern="\d{2}.\d{2}.\d{4}\s{1}\d{2}:\d{2}:\d{2}" /></span></label><br />
-			<label><span class="columnLeft">Unix-Zeitstempel:</span> <span class="columnRight"><input type="text" name="timestamp" pattern="\d{10}" /></span></label><br />
+			<label><span class="columnLeft">Datum:</span> <span class="columnRight"><input id="dateTime" type="text" name="date" pattern="\d{2}.\d{2}.\d{4}\s{1}\d{2}:\d{2}:\d{2}" /></span></label><br />
+			<label><span class="columnLeft">Unix-Zeitstempel:</span> <span class="columnRight"><input id="timestamp" type="text" name="timestamp" pattern="\d{10}" autofocus /></span></label><br />
 			
 			<input type="submit" accesskey="s" />
 			<input type="reset" accesskey="r" />
@@ -70,72 +71,20 @@
 		?>
 		
 		<div class="copyright">
-			<a href="http://kittmedia.com">&copy; <?php echo date('Y'); ?> KittMedia Productions</a>
+			<a href="http://kittmedia.com">&copy; <?php echo date('Y'); ?> KittMedia</a>
 		</div>
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="js/jquery-ui-timepicker-addon.min.js"></script>
-
+<script src="js/flatpickr.min.js"></script>
 <script>
-	//<![CDATA[
-	$(function() {
-		// datepicker
-		$.datepicker.regional['de'] = {
-			clearText: 'löschen',
-			clearStatus: 'aktuelles Datum löschen',
-			closeText: 'schließen',
-			closeStatus: 'ohne Änderungen schließen',
-			prevText: '&laquo;',
-			prevStatus: 'letzten Monat zeigen',
-			nextText: '&raquo;',
-			nextStatus: 'nächsten Monat zeigen',
-			currentText: 'heute',
-			currentStatus: '',
-			monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-			monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-			monthStatus: 'anderen Monat anzeigen',
-			yearStatus: 'anderes Jahr anzeigen',
-			weekHeader: 'Wo',
-			weekStatus: 'Woche des Monats',
-			dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-			dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-			dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-			dayStatus: 'Setze DD als ersten Wochentag',
-			dateStatus: 'Wähle D, M d',
-			dateFormat: 'dd.mm.yy',
-			firstDay: 1,
-			initStatus: 'Wähle ein Datum',
-			isRTL: true
-		};
-		$.datepicker.setDefaults($.datepicker.regional['de']);
-		
-			// timepicker
-		$.timepicker.regional['de'] = {
-			timeOnlyTitle: 'Zeit wählen',
-			timeText: 'Zeit',
-			hourText: 'Stunde',
-			minuteText: 'Minute',
-			secondText: 'Sekunde',
-			millisecText: 'Millisekunde',
-			timezoneText: 'Zeitzone',
-			currentText: 'Jetzt',
-			closeText: 'Fertig',
-			timeFormat: 'HH:mm:ss',
-			amNames: ['vorm.', 'AM', 'A'],
-			pmNames: ['nachm.', 'PM', 'P'],
-			ampm: false
-		};
-		$.timepicker.setDefaults($.timepicker.regional['de']);
-		
-		$('.dateTime').datetimepicker({
-			showTimepicker: true,
-			dateFormat: 'dd.mm.yy'
+	document.addEventListener('DOMContentLoaded', function() {
+		var picker = flatpickr(document.getElementById('dateTime'), {
+			dateFormat: 'd.m.Y H:i',
+			enableTime: true,
+			time_24hr: true
 		});
 	});
-	//]]>
 </script>
 </body>
 </html>
