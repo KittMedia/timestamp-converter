@@ -59,12 +59,12 @@
 		
 		if (!$isError) {
 			if ( ! empty( $timestamp ) ) {
-				echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strftime( '%d.%m.%Y %H:%M:%S', $timestamp ) . '" /></span><br />';
-				echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $timestamp . '" /></span>';
+				echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly autofocus onclick="select(this);" value="' . strftime( '%d.%m.%Y %H:%M:%S', $timestamp ) . '" /></span><br />';
+				echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly onclick="select(this);" value="' . $timestamp . '" /></span>';
 			}
 			else if ( ! empty( $date ) ) {
-				echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . $date . '" /></span><br />';
-				echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly="readonly" onclick="select(this);" value="' . strtotime( $date ) . '" /></span>';
+				echo '<span class="columnLeft">Datum:</span> <span class="columnRight"><input type="text" readonly onclick="select(this);" value="' . $date . '" /></span><br />';
+				echo '<span class="columnLeft">Zeitstempel:</span> <span class="columnRight"><input type="text" readonly autofocus onclick="select(this);" value="' . strtotime( $date ) . '" /></span>';
 			}
 		}
 		
@@ -74,12 +74,13 @@
 		?>
 		
 		<div class="copyright">
-			<a href="http://kittmedia.com">&copy; <?php echo date('Y'); ?> KittMedia</a>
+			<a href="https://kittmedia.com">&copy; <?php echo date('Y'); ?> KittMedia</a>
 		</div>
 	</div>
 </div>
 
 <script src="js/flatpickr.min.js"></script>
+<script src="js/de.min.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var picker = flatpickr(document.getElementById('dateTime'), {
@@ -87,7 +88,8 @@
 			enableSeconds: true,
 			enableTime: true,
 			minuteIncrement: 1,
-			time_24hr: true
+			time_24hr: true,
+			locale: 'de'
 		});
 	});
 </script>
