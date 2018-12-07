@@ -1,3 +1,7 @@
+- Version 1.2.0
+	– Updated flatpickr library to v4.5.2 and added German translation
+	– Improved auto-selecting
+
 - Version 1.1.1
 	- Fixed non-working user selection on timestamp input field
 
