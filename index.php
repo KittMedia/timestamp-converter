@@ -73,6 +73,13 @@
 		}
 		?>
 		
+		<nav class="footer-menu">
+			<ul class="footer-menu-list">
+				<li class="footer-menu-item"><a href="https://kittmedia.com/impressum/">Impressum</a></li>
+				<li class="footer-menu-item"><a href="https://kittmedia.com/datenschutzerklaerung/">Datenschutzerklärung</a></li>
+			</ul>
+		</nav>
+		
 		<div class="copyright">
 			<a href="https://kittmedia.com">&copy; <?php echo date('Y'); ?> KittMedia</a>
 		</div>
@@ -89,7 +96,8 @@
 			enableTime: true,
 			minuteIncrement: 1,
 			time_24hr: true,
-			locale: 'de'
+			locale: 'de',
+			defaultHour: 0
 		});
 	});
 </script>
